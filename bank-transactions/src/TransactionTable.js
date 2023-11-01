@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
-const TransactionTable = () => {
+const TransactionTable = ({ searchTerm }) => {
   const [transactions, setTransactions] = useState([]);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/transactions')
       .then(response => response.json())
       .then(data => setTransactions(data));
   }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const filtered = transactions.filter(transaction =>
+        transaction.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredTransactions(filtered);
+    } else {
+      setFilteredTransactions(transactions);
+    }
+  }, [searchTerm, transactions]);
 
   return (
     <table>
@@ -20,7 +32,7 @@ const TransactionTable = () => {
         </tr>
       </thead>
       <tbody>
-        {transactions.map(transaction => (
+        {filteredTransactions.map(transaction => (
           <tr key={transaction.id}>
             <td>{transaction.date}</td>
             <td>{transaction.description}</td>
