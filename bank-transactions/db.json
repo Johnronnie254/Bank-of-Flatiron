@@ -118,6 +118,13 @@
       "category": "luxury",
       "amount": "200",
       "id": 17
+    },
+    {
+      "date": "2023-12-10",
+      "description": "Moringa fees payment",
+      "category": "fees",
+      "amount": "11500",
+      "id": 18
     }
   ]
 }

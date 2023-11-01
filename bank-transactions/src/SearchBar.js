@@ -4,8 +4,9 @@ const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-    onSearch(e.target.value);
+    const term = e.target.value;
+    setSearchTerm(term);
+    onSearch(term); // Call the onSearch function with the updated term
   };
 
   return (
